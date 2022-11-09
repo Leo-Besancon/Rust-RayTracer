@@ -9,7 +9,7 @@ pub struct Light {
 }
 
 impl Light {
-    pub fn new(center: Vector, intensity:Vector) -> Light
+    pub fn new(center: Vector, intensity:Vector) -> Self
     {
         Light {center, intensity, animations: Vec::new()}
     }

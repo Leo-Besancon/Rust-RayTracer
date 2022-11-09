@@ -5,9 +5,16 @@ This library uses RayTracing methods to render a 3D scene, which are composed of
 
 This project contains:
 * A Rust library crate in /src/lib.rs
-* A Rust binary crate in /src/main.rs in order to present how to use the library. It defines a default scene, with spheres, a camera, lightning and a configuration files.
+* A Rust binary crate in /src/main.rs in order to present how to use the library. It defines a default scene, with spheres, a camera, lighting and a rendering configuration.
 * Documentation
 * Tests
+
+Some implemented features:
+* Indirect lighting and smooth shadows
+* Diffuse, Reflective and Refractive and Hybrid (Phong BRDF) material handling
+* Anti-aliasing and Monte Carlo noise-reducing
+* Multi-threading with the rayon crate
+* Object, camera and lights animations
 
 To run, please use the following command lines:
 ```

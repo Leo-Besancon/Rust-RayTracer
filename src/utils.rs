@@ -17,17 +17,17 @@ pub struct Vector {
 }
     
 impl Vector {
-    pub fn new(x:f64, y:f64, z:f64) -> Vector {
+    pub fn new(x:f64, y:f64, z:f64) -> Self {
         Vector {x,y,z}
     }
 
 /// Builds a new Vector with its 3 components equal to the argument.
-    pub fn new_eq(a:f64) -> Vector {
+    pub fn new_eq(a:f64) -> Self {
         Vector { x: a, y: a, z: a }
     }
 
 /// Builds a new Vector by taking the maximum of the two given Vectors component by component
-    pub fn max(self, other: Vector) -> Vector {
+    pub fn max(self, other: Vector) -> Self {
         Vector {x: self.x.max(other.x), y: self.y.max(other.y), z: self.z.max(other.z)}
     }
 
@@ -42,7 +42,7 @@ impl Vector {
     }
     
 /// Computes the cross product of two vectors
-    pub fn cross(self, other: Vector) -> Vector {
+    pub fn cross(self, other: Self) -> Self {
         let (u1,u2,u3) = (self.x, self.y, self.z);
         let (v1,v2,v3) = (other.x, other.y, other.z);
 
@@ -50,7 +50,7 @@ impl Vector {
     }    
 
 /// Computes the dot product of two vectors
-    pub fn dot(self, other: Vector) -> f64 {
+    pub fn dot(self, other: Self) -> f64 {
         let (u1,u2,u3) = (self.x, self.y, self.z);
         let (v1,v2,v3) = (other.x, other.y, other.z);
 
@@ -58,11 +58,11 @@ impl Vector {
     }
 
 /// Divides the Vector by its norm
-    pub fn normalize(self) -> Vector {
+    pub fn normalize(self) -> Self {
         self / self.norm()
     }
 
-    pub fn rotate_x(self, theta_deg: f64) -> Vector {
+    pub fn rotate_x(self, theta_deg: f64) -> Self {
         let theta_rad = theta_deg * PI / 180.;
         let x = self.x;
         let y = theta_rad.cos() * self.y - theta_rad.sin() * self.z;
@@ -71,7 +71,7 @@ impl Vector {
         Vector {x,y,z}
     }
 
-    pub fn rotate_y(self, theta_deg: f64) -> Vector {
+    pub fn rotate_y(self, theta_deg: f64) -> Self {
         let theta_rad = theta_deg * PI / 180.;
 
         let x = theta_rad.cos() * self.x + theta_rad.sin() * self.z;
@@ -81,7 +81,7 @@ impl Vector {
         Vector {x,y,z}
     }
 
-    pub fn rotate_z(self, theta_deg: f64) -> Vector {
+    pub fn rotate_z(self, theta_deg: f64) -> Self {
         let theta_rad = theta_deg * PI / 180.;
 
         let x = theta_rad.cos() * self.x - theta_rad.sin() * self.y;
@@ -187,34 +187,34 @@ pub struct Color {
     
 impl Color {
 
-    pub fn red() -> Color {
+    pub fn red() -> Self {
         Color {r:1.,g:0.,b:0.}
     }
-    pub fn green() -> Color {
+    pub fn green() -> Self {
         Color {r:0.,g:1.,b:0.}
     }
-    pub fn blue() -> Color {
+    pub fn blue() -> Self {
         Color {r:0.,g:0.,b:1.}
     }
-    pub fn white() -> Color {
+    pub fn white() -> Self {
         Color {r:1.,g:1.,b:1.}
     }
-    pub fn yellow() -> Color {
+    pub fn yellow() -> Self {
         Color {r:1.,g:1.,b:0.}
     }
-    pub fn magenta() -> Color {
+    pub fn magenta() -> Self {
         Color {r:1.,g:0.,b:1.}
     }
-    pub fn cyan() -> Color {
+    pub fn cyan() -> Self {
         Color {r:0.,g:1.,b:1.}
     }
-    pub fn black() -> Color {
+    pub fn black() -> Self {
         Color {r:0.,g:0.,b:0.}
     }
-    pub fn new(r:f64, g:f64, b:f64) -> Color {
+    pub fn new(r:f64, g:f64, b:f64) -> Self {
         Color {r,g,b}
     }
-    pub fn new_eq(a:f64) -> Color {
+    pub fn new_eq(a:f64) -> Self {
         Color { r: a, g: a, b: a }
     }
  
@@ -300,7 +300,7 @@ pub struct Material {
 }
     
 impl Material {
-    pub fn create_mirror(specular_color: Color) -> Material {
+    pub fn create_mirror(specular_color: Color) -> Self {
         Material {
             color: Color::black(),
             mirror: true,
@@ -314,7 +314,7 @@ impl Material {
         }
     }
 
-    pub fn create_transparent(specular_color: Color, n_object: f64) -> Material {
+    pub fn create_transparent(specular_color: Color, n_object: f64) -> Self {
         Material {
             color: Color::black(),
             mirror: false,
@@ -328,7 +328,7 @@ impl Material {
         }
     }
 
-    pub fn create_emissive(color: Color, emissivity: f64) -> Material {
+    pub fn create_emissive(color: Color, emissivity: f64) -> Self {
         Material {
             color: color,
             mirror: false,
@@ -342,7 +342,7 @@ impl Material {
         }
     }
 
-    pub fn create_diffuse(color: Color) -> Material {
+    pub fn create_diffuse(color: Color) -> Self {
         Material {
             color: color,
             mirror: false,
@@ -356,7 +356,7 @@ impl Material {
         }
     }
 
-    pub fn create_phong(color: Color, specular_color: Color, phong_exponent: f64) -> Material {
+    pub fn create_phong(color: Color, specular_color: Color, phong_exponent: f64) -> Self {
         Material {
             color: color,
             mirror: false,
@@ -391,7 +391,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub const fn new(height: usize, width: usize, gamma: f64, debug_info: bool, nb_iter_max: usize, nb_rays: usize, dof: bool, aa: bool, start_time: f64, end_time: f64, nb_frames: usize) -> Config
+    pub const fn new(height: usize, width: usize, gamma: f64, debug_info: bool, nb_iter_max: usize, nb_rays: usize, dof: bool, aa: bool, start_time: f64, end_time: f64, nb_frames: usize) -> Self
     {
         Config {height, width, gamma, debug_info, nb_iter_max, nb_rays, dof, aa, start_time, end_time, nb_frames}
     }

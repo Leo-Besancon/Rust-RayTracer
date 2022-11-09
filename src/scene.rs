@@ -18,7 +18,7 @@ pub struct Scene {
 }
 
 impl Scene {
-    pub fn new(	) -> Scene {
+    pub fn new(	) -> Self {
         let objects = Vec::new();
         let lights = Vec::new();
         let light_objects = Vec::new();

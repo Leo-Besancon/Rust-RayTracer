@@ -13,7 +13,7 @@ pub struct Ray {
 }
 
 impl Ray {
-    pub fn new(origin: Vector, direction: Vector) -> Ray {
+    pub fn new(origin: Vector, direction: Vector) -> Self {
         Ray {origin, direction}
     }
 
@@ -22,12 +22,12 @@ impl Ray {
     }
 
 /// Normalizes the direction of a Ray
-    pub fn normalize(self) -> Ray {
+    pub fn normalize(self) -> Self {
         Ray {origin: self.origin, direction: self.direction.normalize()}
     }
 
 /// Creates a Ray that will be used to get the color of a given pixel in the image
-    pub fn new_basic_ray(i: isize, j:isize, camera: &Camera) -> Ray {
+    pub fn new_basic_ray(i: isize, j:isize, camera: &Camera) -> Self {
 
         let right = camera.direction.cross(camera.up);
 
@@ -37,7 +37,7 @@ impl Ray {
     }
 
 /// Creates a Ray that will be used to get the color of a given pixel in the image, randomized with a gaussian component in order to provide anti-aliasing when averaging the resulting values
-    pub fn new_aa_ray(i: isize, j:isize, camera: &Camera) -> Ray {
+    pub fn new_aa_ray(i: isize, j:isize, camera: &Camera) -> Self {
 
         let mut rng = rand::thread_rng();
 
@@ -57,7 +57,7 @@ impl Ray {
     }
 
 /// This anti-aliased ray also handles the Depth of Field of the camera to provide more realistic renders
-    pub fn new_aa_and_dof_ray(i: isize, j:isize, camera: &Camera) -> Ray {
+    pub fn new_aa_and_dof_ray(i: isize, j:isize, camera: &Camera) -> Self {
     
         let mut rng = rand::thread_rng();
 
@@ -77,7 +77,7 @@ impl Ray {
     }
 
 /// Computes the reflection of a Ray on the object it intersects
-    pub fn reflect(self, intersection: Intersection) -> Ray {
+    pub fn reflect(self, intersection: Intersection) -> Self {
 
         let direction = self.direction - (intersection.normal * 2. * self.direction.dot(intersection.normal));
         
@@ -85,7 +85,7 @@ impl Ray {
     }
 
 /// Computes the refraction of a Ray on the object it intersects
-    pub fn refract(self, intersection: Intersection, n_air: f64, n_object: f64, fresnel: bool) -> Option<Ray> {
+    pub fn refract(self, intersection: Intersection, n_air: f64, n_object: f64, fresnel: bool) -> Option<Self> {
 
         let mut rng = rand::thread_rng();
       
@@ -167,7 +167,7 @@ impl Ray {
     }
 
 /// Builds a new random Ray for indirect lightning computations
-	pub fn new_rand_ray(center: Vector, n: Vector) -> Ray {
+	pub fn new_rand_ray(center: Vector, n: Vector) -> Self {
 
         let mut rng = rand::thread_rng();
       
@@ -193,7 +193,7 @@ impl Ray {
     }
 
 /// Builds a new random Ray on the surface of a Spherical light
-	pub fn new_rand_ray_angle_uniform(center: Vector, surface: f64, dir: Vector) -> Ray {
+	pub fn new_rand_ray_angle_uniform(center: Vector, surface: f64, dir: Vector) -> Self {
         
         let rayon = (surface / (4.0 * PI)).sqrt();
 
@@ -222,7 +222,7 @@ impl Ray {
     }
 
 /// Builds a new random Ray biased by a Phong BRFD Material 
-    pub fn new_rand_ray_phong(center: Vector, phong_exponent: f64, dir: Vector) -> Ray {
+    pub fn new_rand_ray_phong(center: Vector, phong_exponent: f64, dir: Vector) -> Self {
 
         let mut rng = rand::thread_rng();
       
@@ -250,26 +250,26 @@ impl Ray {
     
     }
 
-	pub fn translate(self, vec: Vector) -> Ray {
+	pub fn translate(self, vec: Vector) -> Self {
         Ray {origin: self.origin + vec, direction: self.direction}
     }
 
-    pub fn rotate_x(self, theta: f64, rotation_center: Vector) -> Ray
+    pub fn rotate_x(self, theta: f64, rotation_center: Vector) -> Self
     {
         Ray {origin: (self.origin - rotation_center).rotate_x(theta) + rotation_center, direction: self.direction.rotate_x(theta)}
     }
     
-    pub fn rotate_y(self, theta: f64, rotation_center: Vector) -> Ray
+    pub fn rotate_y(self, theta: f64, rotation_center: Vector) -> Self
     {
         Ray {origin: (self.origin - rotation_center).rotate_y(theta) + rotation_center, direction: self.direction.rotate_y(theta)}
     }
-    pub fn rotate_z(self, theta: f64, rotation_center: Vector) -> Ray
+    pub fn rotate_z(self, theta: f64, rotation_center: Vector) -> Self
     {
         Ray {origin: (self.origin - rotation_center).rotate_z(theta) + rotation_center, direction: self.direction.rotate_z(theta)}
     }
 
 /// Applies an object's animation to the Ray
-    pub fn apply_animations(self, animations: Vec<Animation>, time: f64) -> Ray {
+    pub fn apply_animations(self, animations: Vec<Animation>, time: f64) -> Self {
         let mut cur_ray = self;
 
         for a in animations {
@@ -299,7 +299,7 @@ impl Ray {
     }
 
 /// Reverses the application of an object's animation to the Ray 
-    pub fn reverse_animations(self, animations: Vec<Animation>, time: f64) -> Ray
+    pub fn reverse_animations(self, animations: Vec<Animation>, time: f64) -> Self
     {
         let mut reverse_animations: Vec<Animation> = Vec::new();
 

@@ -13,7 +13,7 @@ pub struct Intersection {
 }
 
 impl Intersection {
-    pub fn new(point: Vector, normal: Vector, material: Material) -> Intersection {
+    pub fn new(point: Vector, normal: Vector, material: Material) -> Self {
 
         Intersection {point,normal, material}
     }
@@ -37,13 +37,13 @@ impl Intersection {
     }
 
 /// Used to make sure the ray starts from outside the object, to avoid getting shadowed by itself in case of float compute errors
-    pub fn get_inter_nudged(self) -> Intersection {
+    pub fn get_inter_nudged(self) -> Self {
 
         Intersection {point: self.point + self.normal * 0.0001, normal: self.normal, material: self.material}
     }
 
 /// Used to make sure the ray starts from inside the object (e.g. for transparent materials), to avoid getting shadowed by itself in case of float compute errors
-    pub fn get_inter_nudged_neg(self) -> Intersection {
+    pub fn get_inter_nudged_neg(self) -> Self {
     
         Intersection {point: self.point - self.normal * 0.0001, normal: self.normal, material: self.material}
     }

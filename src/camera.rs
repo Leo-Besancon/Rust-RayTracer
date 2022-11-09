@@ -17,7 +17,7 @@ pub struct Camera {
 }
 
 impl Camera {
-    pub fn new(	center: Vector, direction: Vector, up: Vector, fov_degrees: f64, focal: f64, height: usize, width: usize) -> Camera {
+    pub fn new(	center: Vector, direction: Vector, up: Vector, fov_degrees: f64, focal: f64, height: usize, width: usize) -> Self {
         Camera {center, direction, up, fov_degrees, focal, height, width, animations: Vec::new()}
     }
     pub fn new_default() -> Camera {
