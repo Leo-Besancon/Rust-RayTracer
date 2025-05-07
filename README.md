@@ -1,3 +1,4 @@
+Note: This project is a spinoff of [my C++ RayTracing project](https://github.com/Leo-Besancon/RayTracer). Don't hesitate to go through this repository for additional features I have not ported to Rust yet, such as Mesh rendering, as well as procedural and UV textures handling.
 
 # RayTracer
 
@@ -26,5 +27,3 @@ cargo doc --open
 Example render:
 
 ![](/image_0.bmp)
-
-Note: This project is a spinoff of [my C++ RayTracing project](https://github.com/Leo-Besancon/RayTracer). Don't hesitate to go through this repository for additional features I have not ported to Rust yet, such as Mesh rendering, as well as procedural and UV textures handling.
